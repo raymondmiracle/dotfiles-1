@@ -2,20 +2,9 @@
 
 shopt -s extglob
 
-function install_gcc8 {
-	printf "%b" "deb https://its-pointless.github.io/files/  termux extras" >> $PREFIX/etc/apt/sources.list.d/gcc8.list
-	wget -q https://its-pointless.github.io/pointless.gpg && {\
-		apt-key add pointless.gpg; \
-		rm pointless.gpg; \
-		pkg update; \
-		pkg install gcc-8; \
-	}
-}
-
 function install_packages {
-	local packages=( 'autoconf' 'automake' 'binutils' 'coreutils' 'curl' 'dirmngr' 'file' 'git' 'gnupg' 'grep' 'jq' 'make' 'openssh' 'p7zip' 'patch' 'rclone' 'rsync' 'silversearcher-ag' 'strace' 'tar' 'termux-exec' 'tree' 'util-linux' 'unstable-repo' 'unzip' 'vim' 'wget' 'x11-repo' 'xz-utils' 'yasm' 'zip' )
+	local packages=( 'autoconf' 'automake' 'binutils' 'coreutils' 'curl' 'dirmngr' 'file' 'git' 'gnupg' 'grep' 'jq' 'make' 'p7zip' 'patch' 'rclone' 'rsync' 'silversearcher-ag' 'strace' 'tar' 'termux-exec' 'tree' 'util-linux' 'unstable-repo' 'unzip' 'micro' 'wget' 'x11-repo' 'xz-utils' 'yasm' 'zip' )
 	pkg install "${packages[@]}"
-	install_gcc8
 }
 
 function setup_gpgkeys {
@@ -27,9 +16,7 @@ function setup_gpgkeys {
 
 function setup_confs {
 	[[ ! -d ~/infection ]] && \
-		mkdir -p ~/infection/tests/{shellscripts,c}
-	[[ "$(grep -o "infection" "$PREFIX/etc/profile")" != *infection* ]] && \
-		printf "%b" "PATH=$HOME/infection/tests/c:$HOME/infection/tests/shellscripts:$PATH" >> $PREFIX/etc/profile
+		mkdir -p ~/infection/tests/c
 	cp `pwd`/.gitconfig ~/.gitconfig
 	cp `pwd`/shells/bash/@(.|)[a-zA-Z]* ~/
 	cp -r `pwd`/.termux/ ~/
