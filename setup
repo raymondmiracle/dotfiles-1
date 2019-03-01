@@ -3,7 +3,7 @@
 shopt -s extglob
 
 function install_packages {
-	local packages=( 'binutils' 'coreutils' 'curl' 'dirmngr' 'file' 'git' 'gnupg' 'grep' 'jq' 'make' 'p7zip' 'patch' 'rclone' 'rsync' 'silversearcher-ag' 'strace' 'tar' 'termux-exec' 'tree' 'util-linux' 'unstable-repo' 'unzip' 'wget' 'x11-repo' 'xz-utils' 'yasm' 'zip' )
+	local packages=( 'binutils' 'coreutils' 'curl' 'dirmngr' 'file' 'gdb' termux-api' 'git' 'gnupg' 'grep' 'jq' 'make' 'p7zip' 'patch' 'rclone' 'rsync' 'sed' 'silversearcher-ag' 'strace' 'tar' ''termux-exec' 'tree' 'util-linux' 'unstable-repo' 'unzip' 'vim' 'wget' 'x11-repo' 'xz-utils' 'yasm' 'zip' )
 	pkg install "${packages[@]}"
 	pkg install qemu-system-x86_64
 	
