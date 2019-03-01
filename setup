@@ -10,17 +10,28 @@ function install_packages {
 }
 
 function setup_gpgkeys {
-	gpg_keys=( 'github.asc' )
+	local gpg_keys=( 'github.asc' )
 	for gpgk in "${gpg_keys[@]}"; do \
 		gpg --import `pwd`/keys/$gpgk; \
 	done
+	unset gpgk gpg_keys
 }
 
 function setup_confs {
 	[[ ! -d ~/infection ]] && \
 		mkdir -p ~/infection/tests/c
 	cp `pwd`/.gitconfig ~/.gitconfig
-	cp `pwd`/shells/bash/@(.|)[a-zA-Z]* ~/
+	
+	local FILES=(.bashrc .functions .variables profile)
+	for file in "${FILE[@]}"; do
+		[[ file = *profile* ]] && {
+			cp `pwd`/shells/bash/$file $PREFIX/etc/
+			continue;
+		}
+		cp `pwd`/shells/bash/$file ~/
+        done
+	unset FILES file
+
 	cp -r `pwd`/.termux/ ~/
 	[[ -e $PREFIX/etc/motd ]] && \
 		rm $PREFIX/etc/motd

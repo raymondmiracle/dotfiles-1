@@ -1,15 +1,16 @@
-#!/data/data/com.termux/files/usr/bin/env bash
+#!/data/data/com.termux/files/usr/bin/bash
 
+shopt -s autocd
+shopt -s cdable_vars
 shopt -s checkhash
 shopt -s checkwinsize
-shopt -s cdable_vars
-shopt -s autocd
 shopt -s cmdhist
 shopt -s dirspell
 shopt -s extglob
+shopt -s globstar
+shopt -s histappend
+shopt -s histverify
 shopt -s hostcomplete
-shopt -s nocaseglob
-shopt -s nocasematch
 
 alias cls='clear'
 alias cp='cp -i'
@@ -34,11 +35,13 @@ alias rm='rm -i --preserve-root'
 alias vdir='vdir --color=auto -h'
 alias x64='qemu-x86_64'
 
-export EDITOR='vim'
+export AR='ar'
+export AS='as'
 export CC='clang'
 export CHIP='/storage/DC83-7ECB'
-export AS='as'
-export AR='ar'
 export CXX='clang++'
-export LD=ld
 export GPG_TTY=$(tty)
+export HISTFILE="$HOME/.bash_history"
+export HISTSIZE=4096
+export HISTFILESIZE=16384
+export HISTCONTROL="ignoreboth"
