@@ -23,12 +23,10 @@ function setup_confs {
 	cp `pwd`/.gitconfig ~/.gitconfig
 	
 	local FILES=(.bashrc .functions .variables profile)
-	for file in "${FILE[@]}"; do
-		[[ file = *profile* ]] && {
+	for file in "${FILES[@]}"; do
+		[[ ${file} = "profile" ]] && {
 			cp `pwd`/shells/bash/$file $PREFIX/etc/
-			continue;
-		}
-		cp `pwd`/shells/bash/$file ~/
+		} || cp `pwd`/shells/bash/$file ~/
         done
 	unset FILES file
 
